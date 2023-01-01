@@ -31,6 +31,14 @@ const choosePhotos = (e) => {
     `<img src=${e.target.dataset.source} />`
   );
   instance.show();
+  if (instance.visible()) {
+    window.addEventListener("keydown", (e) => {
+      e.key === "Escape" && instance.close();
+      //   if (e.key === "Escape") {
+      //     instance.close();
+      //   }
+    });
+  }
 };
 
 photos.addEventListener("click", choosePhotos);
