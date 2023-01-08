@@ -27,18 +27,34 @@ const choosePhotos = (e) => {
   if (e.target.nodeName !== "IMG") {
     return;
   }
-  const instance = basicLightbox.create(
-    `<img src=${e.target.dataset.source} />`
-  );
-  instance.show();
-  if (instance.visible()) {
-    window.addEventListener("keydown", (e) => {
-      e.key === "Escape" && instance.close();
-      //   if (e.key === "Escape") {
-      //     instance.close();
-      //   }
-    });
-  }
 };
+// const instance = basicLightbox.create(
+//   `<img src=${e.target.dataset.source} />`
+// );
+//   instance.show();
+//   if (instance.visible()) {
+//     window.addEventListener("keydown", (e) => {
+//       e.key === "Escape" && instance.close();
+//       //   if (e.key === "Escape") {
+//       //     instance.close();
+//       //   }
+//     });
+//   }
+// };
+// photos.addEventListener("click", choosePhotos);
+const instance = basicLightbox.create(
+  `
+    <div class="modal">
+        <p>A custom modal that has been styled independently. It's not part of basicLightbox, but perfectly shows its flexibility.</p>
+        <input placeholder="Type something">
+        <a>Close</a>
+    </div>
+`,
+  {
+    onShow: (instance) => {
+      instance.element().querySelector("a").onclick = instance.close;
+    },
+  }
+);
 
-photos.addEventListener("click", choosePhotos);
+instance.show();
